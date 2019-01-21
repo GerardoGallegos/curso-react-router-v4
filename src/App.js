@@ -17,9 +17,15 @@ const App = () => (
   <BrowserRouter>
     <>
       <Route path='/' exact component={Home} />
-      <Route path='/' exact component={Home} />
-      <Route path='/hola/' component={Hola} />
-      <Route path='/productos' component={Productos} />
+      <Route path='/hola/' render={Hola} />
+      <Route path='/productos'>
+        {({ match }) => {
+          if (!match) return null
+          return (
+            <Productos />
+          )
+        }}
+      </Route>
     </>
   </BrowserRouter>
 )
