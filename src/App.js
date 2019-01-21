@@ -9,10 +9,16 @@ const Productos = () => (
   <h2>productos</h2>
 )
 
+const Home = () => (
+  <h2>Home</h2>
+)
+
 const App = () => (
   <BrowserRouter>
     <>
-      <Route path='/hola' component={Hola} />
+      <Route path='/' exact component={Home} />
+      <Route path='/' exact component={Home} />
+      <Route path='/hola/' component={Hola} />
       <Route path='/productos' component={Productos} />
     </>
   </BrowserRouter>
