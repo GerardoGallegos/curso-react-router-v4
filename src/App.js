@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
+
+const Hola = () => (
+  <h2>Hola</h2>
+)
+
+const Productos = () => (
+  <h2>productos</h2>
+)
 
 const App = () => (
-  <div>
-    <h1>React Router V4 **</h1>
-  </div>
+  <BrowserRouter>
+    <>
+      <Route path='/hola' component={Hola} />
+      <Route path='/productos' component={Productos} />
+    </>
+  </BrowserRouter>
 )
 
 export default App
