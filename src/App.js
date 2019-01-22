@@ -6,10 +6,6 @@ const Hola = () => (
   <h2>Hola</h2>
 )
 
-const Productos = () => (
-  <h2>productos</h2>
-)
-
 const Home = (props) => {
   console.log(props)
   return (
@@ -36,18 +32,18 @@ const Navegacion = () => (
       Hola
     </NavLink>
   
-    <NavLink to='/productos'
-      activeStyle={NavActive}
-      isActive={(match, location) => {
-        console.log(match)
-        if (!match) return false
-        return !match.isExact
-      }}  
-    >
+    <NavLink to='/productos' activeStyle={NavActive} >
       Productos
     </NavLink>
   </nav>
 )
+
+const Productos = (props) => {
+  debugger
+  return (
+    <h2>productos</h2>
+  )
+}
 
 const App = () => (
   <BrowserRouter>
@@ -55,7 +51,7 @@ const App = () => (
       <Navegacion />
       <Route path='/' exact component={Home} />
       <Route path='/hola/' render={Hola} />
-      <Route path='/productos/:id?' render={Productos} />
+      <Route path='/productos' render={Productos} />
     </>
   </BrowserRouter>
 )
