@@ -39,19 +39,29 @@ const Navegacion = () => (
 )
 
 const Productos = (props) => {
-  debugger
   return (
     <h2>productos</h2>
+  )
+}
+
+const ProductosCategoria = ({ match }) => {
+  console.log(match)
+  return (
+    <h3>
+      Categoria: { match.params.categoria } <br/>
+      ID: { match.params.id }
+    </h3>
   )
 }
 
 const App = () => (
   <BrowserRouter>
     <>
-      <Navegacion />
-      <Route path='/' exact component={Home} />
-      <Route path='/hola/' render={Hola} />
-      <Route path='/productos' render={Productos} />
+      <Route path='/productos' exact render={Productos} />
+      <Route
+        path='/productos/:categoria/:id?'
+        render={ProductosCategoria}
+      />
     </>
   </BrowserRouter>
 )
