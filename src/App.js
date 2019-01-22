@@ -1,56 +1,17 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
+import queryString from 'query-string'
 import './App.css'
 
-const Hola = () => (
-  <h2>Hola</h2>
-)
+const Productos = ({ location }) => {
+  // const query = new URLSearchParams(location.search)
+  // const color = query.get('color')
+  // const talla = query.get('talla')
 
-const Home = (props) => {
-  console.log(props)
+  const { color, talla } = queryString.parse(location.search)
+
   return (
-    <h2>Home</h2>
-  )
-}
-
-const navStyles = {
-  display: 'flex',
-  justifyContent: 'space-around'
-}
-
-const NavActive = {
-  color: 'orangered'
-}
-
-const Navegacion = () => (
-  <nav style={navStyles}>
-    <NavLink to='/' exact activeStyle={NavActive}>
-      Home
-    </NavLink>
-  
-    <NavLink to='/hola' activeClassName='activa'>
-      Hola
-    </NavLink>
-  
-    <NavLink to='/productos' activeStyle={NavActive} >
-      Productos
-    </NavLink>
-  </nav>
-)
-
-const Productos = (props) => {
-  return (
-    <h2>Productos</h2>
-  )
-}
-
-const ProductosCategoria = ({ match }) => {
-  console.log(match)
-  return (
-    <h3>
-      Ordenar por: { match.params.precio } precio <br />
-      Producto ID: { match.params.id }
-    </h3>
+    <h2>Color: { color } talla: { talla }</h2>
   )
 }
 
@@ -58,10 +19,6 @@ const App = () => (
   <BrowserRouter>
     <>
       <Route path='/productos' exact render={Productos} />
-      <Route
-        path='/productos/:precio(mayor|menor)/:id(\d{3}-\d{2})?'
-        render={ProductosCategoria}
-      />
     </>
   </BrowserRouter>
 )

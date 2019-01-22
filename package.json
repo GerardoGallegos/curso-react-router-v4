@@ -14,6 +14,7 @@
     "poi": "^12.4.5"
   },
   "dependencies": {
+    "query-string": "^6.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1"
