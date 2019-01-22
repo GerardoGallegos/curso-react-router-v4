@@ -40,7 +40,7 @@ const Navegacion = () => (
 
 const Productos = (props) => {
   return (
-    <h2>productos</h2>
+    <h2>Productos</h2>
   )
 }
 
@@ -48,8 +48,8 @@ const ProductosCategoria = ({ match }) => {
   console.log(match)
   return (
     <h3>
-      Categoria: { match.params.categoria } <br/>
-      ID: { match.params.id }
+      Ordenar por: { match.params.precio } precio <br />
+      Producto ID: { match.params.id }
     </h3>
   )
 }
@@ -59,7 +59,7 @@ const App = () => (
     <>
       <Route path='/productos' exact render={Productos} />
       <Route
-        path='/productos/:categoria/:id?'
+        path='/productos/:precio(mayor|menor)/:id(\d{3}-\d{2})?'
         render={ProductosCategoria}
       />
     </>
