@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
+import './App.css'
 
 const Hola = () => (
   <h2>Hola</h2>
@@ -12,7 +13,7 @@ const Productos = () => (
 const Home = (props) => {
   console.log(props)
   return (
-    <h2>Home { props.location.state.message }</h2>
+    <h2>Home</h2>
   )
 }
 
@@ -21,19 +22,30 @@ const navStyles = {
   justifyContent: 'space-around'
 }
 
+const NavActive = {
+  color: 'orangered'
+}
+
 const Navegacion = () => (
   <nav style={navStyles}>
-    <Link to={{
-      pathname: '/',
-      search: '?ordenar=nombre',
-      hash: '#hash-otro',
-      state: {
-        message: 'Soy Ninja PRO',
-        cantidad: 555
-      }
-    }}>Home</Link>
-    <Link to='/hola'>Hola</Link>
-    <Link to='/productos'>Productos</Link>
+    <NavLink to='/' exact activeStyle={NavActive}>
+      Home
+    </NavLink>
+  
+    <NavLink to='/hola' activeClassName='activa'>
+      Hola
+    </NavLink>
+  
+    <NavLink to='/productos'
+      activeStyle={NavActive}
+      isActive={(match, location) => {
+        console.log(match)
+        if (!match) return false
+        return !match.isExact
+      }}  
+    >
+      Productos
+    </NavLink>
   </nav>
 )
 
@@ -43,7 +55,7 @@ const App = () => (
       <Navegacion />
       <Route path='/' exact component={Home} />
       <Route path='/hola/' render={Hola} />
-      <Route path='/productos' render={Productos} />
+      <Route path='/productos/:id?' render={Productos} />
     </>
   </BrowserRouter>
 )
