@@ -1,4 +1,9 @@
 
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
 a.activa {
   color: #ff008d;
 }
