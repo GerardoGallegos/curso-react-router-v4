@@ -5,8 +5,8 @@ import './App.css'
 const Navegation = () => (
   <nav>
     <NavLink to='/' exact activeClassName='activa'>Home</NavLink>
-    <NavLink to='/registro' activeClassName='activa'>Registro</NavLink>
-    <NavLink to='/dashboard' activeClassName='activa'>Dashboard</NavLink>
+    <NavLink to='/ninja' activeClassName='activa'>Ninja</NavLink>
+    <NavLink to='/videos' activeClassName='activa'>Videos</NavLink>
   </nav>
 )
 
@@ -14,33 +14,36 @@ const Home = () => (
   <h2>Home</h2>
 )
 
-const Registro = () => (
-  <h2>Registro</h2>
+const Ninja = () => (
+  <h2>Ninja</h2>
 )
 
-const OpcionDashboard = ({ match }) => (
-  <h3>Opcion: { match.params.opcion }</h3>
+const Videos = () => (
+  <h2>Videos</h2>
 )
 
-const Dashboard = () => (
-  <div>
-    <nav>
-      <NavLink to='/dashboard/sucursales' activeClassName='activa'>Sucursales</NavLink>
-      <NavLink to='/dashboard/empleados' activeClassName='activa'>Empleados</NavLink>
-      <NavLink to='/dashboard/huespedes' activeClassName='activa'>Huespedes</NavLink>
-    </nav>
-    <h2>Dashboard</h2>
-    <Route path='/dashboard/:opcion' render={OpcionDashboard} />
-  </div>
-)
+const NavegacionImperativa = ({ history }) => {
+  console.log(history)
+  return (
+    <div>
+      <p>Navegacion Imperativa</p>
+      <button onClick={history.goBack}>Atras</button>
+      <button onClick={history.goForward}>Adelante</button>
+      <button onClick={() => history.go(-2)}>Go 2</button>
+      <button onClick={() => history.push('/ninja')}>Go Ninja</button>
+      <button onClick={() => history.replace('/ninja')}>Replace Ninja</button>
+    </div>
+  )
+}
 
 const App = () => (
   <BrowserRouter>
     <>
       <Navegation />
+      <Route render={NavegacionImperativa}/>
       <Route path='/' exact render={Home} />
-      <Route path='/registro' render={Registro} />
-      <Route path='/dashboard' render={Dashboard} />
+      <Route path='/ninja' render={Ninja} />
+      <Route path='/videos' render={Videos} />
     </>
   </BrowserRouter>
 )
