@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './App.css'
 
 const Navegation = () => (
@@ -11,39 +12,45 @@ const Navegation = () => (
 )
 
 const Home = () => (
-  <h2>Home</h2>
+  <section className='route pink'>
+    <h1>Home</h1>
+  </section>
 )
 
-const Ninja = () => (
-  <h2>Ninja</h2>
+const Ninja =  () => (
+  <section className='route blue'>
+    <h1>Ninja</h1>
+  </section>
 )
 
 const Videos = () => (
-  <h2>Videos</h2>
+  <section className='route green'>
+    <h1>Videos</h1>
+  </section>
 )
 
-const NavegacionImperativa = ({ history }) => {
-  console.log(history)
-  return (
-    <div>
-      <p>Navegacion Imperativa</p>
-      <button onClick={history.goBack}>Atras</button>
-      <button onClick={history.goForward}>Adelante</button>
-      <button onClick={() => history.go(-2)}>Go 2</button>
-      <button onClick={() => history.push('/ninja')}>Go Ninja</button>
-      <button onClick={() => history.replace('/ninja')}>Replace Ninja</button>
-    </div>
-  )
-}
 
 const App = () => (
   <BrowserRouter>
     <>
-      <Navegation />
-      <Route render={NavegacionImperativa}/>
-      <Route path='/' exact render={Home} />
-      <Route path='/ninja' render={Ninja} />
-      <Route path='/videos' render={Videos} />
+    <Navegation />
+    <Route render={({ location }) => (
+      <div className='content'>
+        <TransitionGroup>
+          <CSSTransition
+            timeout={700}
+            classNames='fade'
+            key={location.pathname}
+          >
+            <Switch location={location}>
+              <Route path='/' exact render={Home} />
+              <Route path='/ninja' component={Ninja} />
+              <Route path='/videos' render={Videos} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
+    )} />
     </>
   </BrowserRouter>
 )
