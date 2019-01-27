@@ -20,7 +20,7 @@ const Navegation = withRouter((props) => {
   )
 })
 
-const Home = () => <h1>Home</h1>
+const Home = () => <h1>Tipos de Routers</h1>
 
 const Ninja =  () => <h1>Ninja</h1>
 
